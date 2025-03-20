@@ -1,27 +1,34 @@
+<div align="center">
 
-# BrightRoot Academy Platform
+# 🎓 BrightRoot Academy Platform
+### Next-Generation AI-Powered Learning Management System (LMS)
 
-An AI-powered **Learning Management System (LMS)** designed for BrightRoot Academy. The platform integrates **interactive frontend, secure backend, and intelligent AI services** to deliver a modern, personalized education experience.
+[![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge)]()
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)]()
+[![Django](https://img.shields.io/badge/Django-4.2_DRF-092E20?style=for-the-badge&logo=django&logoColor=white)]()
+[![LangChain](https://img.shields.io/badge/LangChain-RAG_AI-121212?style=for-the-badge&logo=chainlink&logoColor=white)]()
+[![Group](https://img.shields.io/badge/INSA-Group_6_Project-FF9900?style=for-the-badge)]()
+
+**Empowering Students and Instructors with Personalized RAG-driven Education Intelligence.**
+
+</div>
 
 ---
 
 ## 🚀 Features
 
 * **Frontend (React + Tailwind)**:
-
   * Responsive, dark mode UI
   * Student & instructor dashboards
   * Course browsing 
 
 * **Backend (Django REST API)**:
-
   * Authentication & user roles (students/instructors/admins)
   * Course, enrollment & progress management
   * Secure API endpoints
 
 * **AI Layer (LangChain + Groq)**:
-
-  * RAG-powered chatbot for course Q\&A
+  * RAG-powered chatbot for course Q&A
   * Personalized learning recommendations
   * Vector database integration for knowledge retrieval
 
@@ -41,14 +48,14 @@ An AI-powered **Learning Management System (LMS)** designed for BrightRoot Acade
 1. **Clone repo**
 
 ```bash
-git clone https://github.com/your-username/brightroot-academy.git
-cd brightroot-academy
+git clone https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy.git
+cd INSA_Group6_BrightRoot_Academy
 ```
 
 2. **Setup Backend**
 
 ```bash
-cd backend
+cd Backend
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
@@ -57,59 +64,13 @@ python manage.py runserver
 3. **Setup Frontend**
 
 ```bash
-cd frontend
+cd front-end
 npm install
 npm run dev
 ```
 
 ---
 
-## 📂 Project Structure
-
-```
-brightroot/
-├── backend/
-│   ├── manage.py
-│   ├── brightroot/                # settings, urls, wsgi/asgi
-│   ├── api/                       # DRF viewsets, serializers, routers
-│   │   ├── auth/                  # register/login endpoints
-│   │   ├── files/                 # upload/list/download endpoints
-│   │   ├── ai/                    # summarize/quiz endpoints (Gemini)
-│   │   └── common/                # utils, pagination, permissions
-│   ├── core/                      # Django models (User, Streak, AI logs, etc.)
-│   └── requirements.txt
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── auth/              # Login/Register (Context API)
-    │   │   ├── pages/             # Dashboard, Uploads, AI tools
-    │   │   └── ui/                # Reusable UI
-    │   ├── services/              # axios clients
-    │   ├── context/               # Auth + Theme context
-    │   ├── styles/                # Dark theme tokens
-    │   └── main.tsx
-    └── Read.me
-
-
-```
-
----
-
-## 🎯 Roadmap
-
-* ✅ MVP with core LMS features
-* ✅ AI-powered Q\&A chatbot
-* 🔄 Multi-agent workflows (tutoring, grading, feedback)
-* 🔄 Deployment to cloud (Docker + Render)
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please fork the repo, create a branch, and submit a PR.
-
----
-
 ## 📜 License
 
-MIT License © 2025 BrightRoot Academy
+MIT License © 2025 BrightRoot Academy — INSA Group 6
