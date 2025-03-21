@@ -23,6 +23,24 @@ By leveraging **Retrieval-Augmented Generation (RAG)** powered by **LangChain**,
 
 ---
 
+## 🏗 System Architecture
+
+```mermaid
+graph TD
+    User["🎓 Client / User Interface\n(React 18 + TailwindCSS + Vite)"]
+    API["⚡ Django REST Framework API\n(Authentication, Courses, Enrollment)"]
+    DB[("🐘 PostgreSQL Database\n(User Profiles, Streaks, Course Data)")]
+    VectorDB[("🧠 ChromaDB / Vector Store\n(Course Document Embeddings)")]
+    AIEngine["🤖 AI RAG Layer\n(LangChain + Groq Llama-3 / Gemini)"]
+
+    User <-->|HTTP REST / JSON| API
+    API <-->|ORM Queries| DB
+    API <-->|Similarity Search| VectorDB
+    API <-->|Prompt Ingestion| AIEngine
+```
+
+---
+
 ## 🚀 Features
 
 * **Frontend (React + Tailwind)**:
