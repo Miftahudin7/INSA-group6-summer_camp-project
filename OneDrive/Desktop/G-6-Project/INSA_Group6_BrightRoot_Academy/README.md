@@ -47,6 +47,21 @@ graph TD
 
 ---
 
+## 🛠 Tech Stack Matrix
+
+| Domain | Technology / Framework | Purpose |
+|---|---|---|
+| **Frontend UI** | React 18, TypeScript, Vite | Fast Single Page Application & component rendering |
+| **Styling** | TailwindCSS | Modern dark mode responsive UI design system |
+| **State & Context** | React Context API, Axios | Global auth state management & REST API client |
+| **Backend API** | Django 4.2, DRF (Django REST Framework) | Secure RESTful API endpoints, CORS & JWT Auth |
+| **Database** | PostgreSQL / Supabase | Relational data persistence (users, courses, streaks) |
+| **AI Orchestration** | LangChain, Groq API (Llama 3 8B), Gemini | RAG pipeline, prompt templates & LLM proxying |
+| **Vector Store** | ChromaDB | High-performance vector embeddings storage & retrieval |
+| **DevOps & Infra** | Docker, GitHub Actions, Render | Automated CI/CD deployment & containerization |
+
+---
+
 ## 🚀 Features
 
 * **Frontend (React + Tailwind)**:
@@ -63,15 +78,6 @@ graph TD
   * RAG-powered chatbot for course Q&A
   * Personalized learning recommendations
   * Vector database integration for knowledge retrieval
-
----
-
-## 🛠 Tech Stack
-
-* **Frontend**: React, TailwindCSS, Vite
-* **Backend**: Django REST Framework, PostgreSQL
-* **AI/LLM**: LangChain, Groq, ChromaDB (vector DB)
-* **Infra/DevOps**: Docker, GitHub Actions (CI/CD), Render/Heroku
 
 ---
 
