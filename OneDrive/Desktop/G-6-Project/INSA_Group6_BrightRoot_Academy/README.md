@@ -39,6 +39,12 @@ graph TD
     API <-->|Prompt Ingestion| AIEngine
 ```
 
+### 🧠 RAG & AI Pipeline Flow
+
+1. **Document Ingestion**: Course PDFs, lecture notes, and syllabus materials are chunked and vectorized using LangChain embeddings.
+2. **Semantic Search**: Student questions trigger similarity searches across ChromaDB vector store.
+3. **Contextual Generation**: Relevant document chunks are injected into Groq Llama 3 / Gemini prompt templates to deliver hallucination-free, accurate answers.
+
 ---
 
 ## 🚀 Features
