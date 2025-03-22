@@ -62,22 +62,17 @@ graph TD
 
 ---
 
-## 🚀 Features
+## ⚡ Key Features & Portals
 
-* **Frontend (React + Tailwind)**:
-  * Responsive, dark mode UI
-  * Student & instructor dashboards
-  * Course browsing 
+### 👨‍🎓 Student Experience
+- **Interactive Course Dashboard**: Track enrolled courses, module progress bars, and active learning streaks.
+- **AI Course Assistant**: Ask natural-language questions directly on course materials with precise citation back to lecture notes.
+- **Smart Material Summarizer**: Summarize multi-page PDF documents and video transcripts into concise key takeaways.
 
-* **Backend (Django REST API)**:
-  * Authentication & user roles (students/instructors/admins)
-  * Course, enrollment & progress management
-  * Secure API endpoints
-
-* **AI Layer (LangChain + Groq)**:
-  * RAG-powered chatbot for course Q&A
-  * Personalized learning recommendations
-  * Vector database integration for knowledge retrieval
+### 👩‍🏫 Instructor Command Center
+- **Course Publishing Suite**: Upload lecture notes, PDF slides, and syllabus documents with automated vector indexing.
+- **Analytics & Engagement Telemetry**: Monitor class completion rates, streak metrics, and AI interaction frequency.
+- **Assignment & Quiz Management**: Review auto-generated quizzes and customize question difficulty.
 
 ---
 
