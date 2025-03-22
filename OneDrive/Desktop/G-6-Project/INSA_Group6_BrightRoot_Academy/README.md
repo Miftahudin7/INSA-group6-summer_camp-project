@@ -65,15 +65,15 @@ graph TD
 ## ⚡ Key Features & Portals
 
 ### 👨‍🎓 Student Experience
-- **Interactive Course Dashboard**: Track enrolled courses, module progress bars, and active learning streaks.
-- **AI Course Assistant**: Ask natural-language questions directly on course materials with precise citation back to lecture notes.
-- **Smart Material Summarizer**: Summarize multi-page PDF documents and video transcripts into concise key takeaways.
-- **Automated AI Quiz Generator**: Dynamically generate multiple-choice and short-answer quizzes based on specific course modules to test comprehension.
+- 📊 **Interactive Course Dashboard**: Track enrolled courses, module progress bars, and active learning streaks.
+- 🤖 **AI Course Assistant**: Ask natural-language questions directly on course materials with precise citation back to lecture notes.
+- 📝 **Smart Material Summarizer**: Summarize multi-page PDF documents and video transcripts into concise key takeaways.
+- 🧠 **Automated AI Quiz Generator**: Dynamically generate multiple-choice and short-answer quizzes based on specific course modules to test comprehension.
 
 ### 👩‍🏫 Instructor Command Center
-- **Course Publishing Suite**: Upload lecture notes, PDF slides, and syllabus documents with automated vector indexing.
-- **Analytics & Engagement Telemetry**: Monitor class completion rates, streak metrics, and AI interaction frequency.
-- **Assignment & Quiz Management**: Review auto-generated quizzes and customize question difficulty.
+- 📚 **Course Publishing Suite**: Upload lecture notes, PDF slides, and syllabus documents with automated vector indexing.
+- 📈 **Analytics & Engagement Telemetry**: Monitor class completion rates, streak metrics, and AI interaction frequency.
+- ⚙️ **Assignment & Quiz Management**: Review auto-generated quizzes and customize question difficulty.
 
 ---
 
