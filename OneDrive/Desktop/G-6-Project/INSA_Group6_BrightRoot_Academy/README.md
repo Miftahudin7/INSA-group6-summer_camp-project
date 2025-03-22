@@ -77,6 +77,19 @@ graph TD
 
 ---
 
+## 📸 Interface Preview
+
+```
+┌───────────────────────────────────────────────────────────────────────┐
+│  🎓 BrightRoot Academy · Dashboard                                    │
+├───────────────────────────────────────────────────────────────────────┤
+│  📘 Enrolled: Computer Networks | 📊 Progress: [████████░░] 80%      │
+│  🤖 AI Tutor: "According to Chapter 4, TCP guarantees delivery..."    │
+└───────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## ⚙️ Installation
 
 1. **Clone repo**
