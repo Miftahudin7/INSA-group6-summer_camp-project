@@ -77,39 +77,29 @@ graph TD
 
 ---
 
-## 📸 Interface Preview
+## ⚙️ Installation & Development Setup
 
-```
-┌───────────────────────────────────────────────────────────────────────┐
-│  🎓 BrightRoot Academy · Dashboard                                    │
-├───────────────────────────────────────────────────────────────────────┤
-│  📘 Enrolled: Computer Networks | 📊 Progress: [████████░░] 80%      │
-│  🤖 AI Tutor: "According to Chapter 4, TCP guarantees delivery..."    │
-└───────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ⚙️ Installation
-
-1. **Clone repo**
-
+### 1. Repository Setup
 ```bash
 git clone https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy.git
 cd INSA_Group6_BrightRoot_Academy
 ```
 
-2. **Setup Backend**
-
+### 2. Django Backend Service Setup
 ```bash
 cd Backend
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py runserver
+python manage.py runserver 0.0.0.0:8000
 ```
 
-3. **Setup Frontend**
-
+### 3. React Frontend Service Setup
 ```bash
 cd front-end
 npm install
