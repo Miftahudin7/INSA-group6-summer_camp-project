@@ -89,13 +89,21 @@ cd INSA_Group6_BrightRoot_Academy
 ```bash
 cd Backend
 python -m venv venv
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
+
+# Activate Virtual Environment:
+# On Windows PowerShell:
+.\venv\Scripts\Activate.ps1
+# On macOS/Linux Terminal:
 source venv/bin/activate
 
+# Install Dependencies
+pip install --upgrade pip
 pip install -r requirements.txt
+
+# Run Database Migrations
 python manage.py migrate
+
+# Launch Local Dev Server
 python manage.py runserver 0.0.0.0:8000
 ```
 
