@@ -101,7 +101,11 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Run Database Migrations
+python manage.py makemigrations
 python manage.py migrate
+
+# Create Admin Superuser (Optional)
+python manage.py createsuperuser
 
 # Launch Local Dev Server
 python manage.py runserver 0.0.0.0:8000
