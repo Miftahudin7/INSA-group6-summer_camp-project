@@ -111,11 +111,18 @@ python manage.py createsuperuser
 python manage.py runserver 0.0.0.0:8000
 ```
 
-### 3. React Frontend Service Setup
+### 3. React Frontend Service Setup (Vite + TailwindCSS)
 ```bash
 cd front-end
+
+# Install Node Modules
 npm install
+
+# Start Vite Development Server (http://localhost:5173)
 npm run dev
+
+# Build Production Bundle
+npm run build
 ```
 
 ---
