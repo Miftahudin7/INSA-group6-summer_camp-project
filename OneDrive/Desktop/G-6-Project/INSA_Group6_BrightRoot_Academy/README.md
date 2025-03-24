@@ -123,6 +123,9 @@ npm run dev
 
 # Build Production Bundle
 npm run build
+
+# Preview Production Build Locally
+npm run preview
 ```
 
 ---
