@@ -91,6 +91,9 @@ Create a `.env` file in the `Backend/` directory:
 | `GEMINI_API_KEY` | Optional | Google Gemini 1.5 Pro API Key | `AIzaSyB...` |
 | `CHROMA_DB_PATH` | Optional | Local ChromaDB vector database directory | `./chroma_db` |
 
+> [!CAUTION]
+> Never commit `.env` files or API secrets to version control. Ensure `.env` is listed in your `.gitignore` file at all times.
+
 ---
 
 ## ⚙️ Installation & Development Setup
