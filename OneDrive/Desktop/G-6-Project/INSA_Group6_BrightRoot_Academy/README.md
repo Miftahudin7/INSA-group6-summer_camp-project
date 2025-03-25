@@ -86,9 +86,10 @@ Create a `.env` file in the `Backend/` directory:
 | `SECRET_KEY` | Yes | Django secret cryptographic key | `django-insecure-key-123` |
 | `DEBUG` | Yes | Debug mode switch (`True`/`False`) | `True` |
 | `ALLOWED_HOSTS` | Yes | Comma-separated host origins | `localhost,127.0.0.1` |
-| `DATABASE_URL` | Yes | PostgreSQL connection string | `postgres://user:pass@localhost:5432/brightroot` |
+| `DATABASE_URL` | Yes | PostgreSQL / Supabase connection string | `postgres://user:pass@ep-xyz.supabase.co:5432/postgres` |
 | `GROQ_API_KEY` | Yes | Groq Cloud Llama-3 API Key | `gsk_12345abcdef...` |
 | `GEMINI_API_KEY` | Optional | Google Gemini 1.5 Pro API Key | `AIzaSyB...` |
+| `CHROMA_DB_PATH` | Optional | Local ChromaDB vector database directory | `./chroma_db` |
 
 ---
 
