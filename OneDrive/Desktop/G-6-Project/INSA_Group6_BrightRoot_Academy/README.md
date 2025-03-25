@@ -87,6 +87,8 @@ Create a `.env` file in the `Backend/` directory:
 | `DEBUG` | Yes | Debug mode switch (`True`/`False`) | `True` |
 | `ALLOWED_HOSTS` | Yes | Comma-separated host origins | `localhost,127.0.0.1` |
 | `DATABASE_URL` | Yes | PostgreSQL connection string | `postgres://user:pass@localhost:5432/brightroot` |
+| `GROQ_API_KEY` | Yes | Groq Cloud Llama-3 API Key | `gsk_12345abcdef...` |
+| `GEMINI_API_KEY` | Optional | Google Gemini 1.5 Pro API Key | `AIzaSyB...` |
 
 ---
 
