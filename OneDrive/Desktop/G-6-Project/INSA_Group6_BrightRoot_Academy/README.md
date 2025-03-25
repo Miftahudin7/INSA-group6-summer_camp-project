@@ -77,6 +77,19 @@ graph TD
 
 ---
 
+## 🔑 Environment Configuration (`.env`)
+
+Create a `.env` file in the `Backend/` directory:
+
+| Environment Variable | Required | Description | Example Value |
+|---|:---:|---|---|
+| `SECRET_KEY` | Yes | Django secret cryptographic key | `django-insecure-key-123` |
+| `DEBUG` | Yes | Debug mode switch (`True`/`False`) | `True` |
+| `ALLOWED_HOSTS` | Yes | Comma-separated host origins | `localhost,127.0.0.1` |
+| `DATABASE_URL` | Yes | PostgreSQL connection string | `postgres://user:pass@localhost:5432/brightroot` |
+
+---
+
 ## ⚙️ Installation & Development Setup
 
 ### 1. Repository Setup
