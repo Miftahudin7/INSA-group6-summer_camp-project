@@ -85,11 +85,11 @@ INSA_Group6_BrightRoot_Academy/
 │   ├── manage.py                  # Django CLI entrypoint
 │   ├── brightroot/                # Core settings, WSGI/ASGI & URL routing
 │   ├── api/                       # DRF ViewSets & REST Controllers
-│   │   ├── auth/                  # Login, Register & JWT tokens
+│   │   ├── auth/                  # Login, Register & JWT tokens management
 │   │   ├── ai/                    # RAG Q&A, Summarization & Quiz endpoints
 │   │   ├── files/                 # File upload handling & media storage
-│   │   └── common/                # Shared utilities & middleware
-│   ├── core/                      # PostgreSQL Models (User, Streak, Course)
+│   │   └── common/                # Shared utilities, pagination & permissions
+│   ├── core/                      # PostgreSQL Models (User, Streak, AI logs, Courses)
 │   └── requirements.txt           # Python dependencies
 │
 └── front-end/                     # React 18 + Vite + Tailwind Client
