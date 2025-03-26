@@ -94,9 +94,12 @@ INSA_Group6_BrightRoot_Academy/
 │
 └── front-end/                     # React 18 + Vite + Tailwind Client
     ├── src/
-    │   ├── components/            # UI components (Auth, Dashboard, AI Drawer)
-    │   ├── context/               # Global Auth Context & Theme Context
-    │   ├── services/              # Axios REST API client handlers
+    │   ├── components/            # Reusable UI components
+    │   │   ├── auth/              # Login/Register forms & Context consumers
+    │   │   ├── pages/             # Student Dashboard, Course Browser, AI Tools
+    │   │   └── ui/                # Glassmorphic Card, Drawer, Modal primitives
+    │   ├── context/               # Auth Context (JWT) & Theme Context (Dark Mode)
+    │   ├── services/              # Axios REST API clients & interceptors
     │   ├── styles/                # CSS design system & Tailwind layers
     │   └── main.tsx               # React application mounting point
     ├── index.html                 # HTML SPA container
