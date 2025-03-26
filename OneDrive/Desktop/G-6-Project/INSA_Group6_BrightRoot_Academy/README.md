@@ -77,6 +77,34 @@ graph TD
 
 ---
 
+## 📂 Repository Directory Breakdown
+
+```text
+INSA_Group6_BrightRoot_Academy/
+├── Backend/                       # Django 4.2 REST API Server
+│   ├── manage.py                  # Django CLI entrypoint
+│   ├── brightroot/                # Core settings, WSGI/ASGI & URL routing
+│   ├── api/                       # DRF ViewSets & REST Controllers
+│   │   ├── auth/                  # Login, Register & JWT tokens
+│   │   ├── ai/                    # RAG Q&A, Summarization & Quiz endpoints
+│   │   ├── files/                 # File upload handling & media storage
+│   │   └── common/                # Shared utilities & middleware
+│   ├── core/                      # PostgreSQL Models (User, Streak, Course)
+│   └── requirements.txt           # Python dependencies
+│
+└── front-end/                     # React 18 + Vite + Tailwind Client
+    ├── src/
+    │   ├── components/            # UI components (Auth, Dashboard, AI Drawer)
+    │   ├── context/               # Global Auth Context & Theme Context
+    │   ├── services/              # Axios REST API client handlers
+    │   ├── styles/                # CSS design system & Tailwind layers
+    │   └── main.tsx               # React application mounting point
+    ├── index.html                 # HTML SPA container
+    └── vite.config.ts             # Vite bundler configuration
+```
+
+---
+
 ## 🔑 Environment Configuration (`.env`)
 
 Create a `.env` file in the `Backend/` directory:
