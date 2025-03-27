@@ -77,17 +77,42 @@ graph TD
 
 ---
 
-## 📡 REST API Specifications
+## 📡 REST API Specifications & Sample Payloads
 
 ### Authentication Endpoints
 - `POST /api/auth/register/` — Register a new student or instructor profile.
 - `POST /api/auth/login/` — Authenticate credentials and receive JWT access/refresh token pair.
 - `GET /api/auth/profile/` — Fetch authenticated user profile and streak statistics.
 
-### AI Engine Endpoints
-- `POST /api/ai/ask/` — Submit a question for RAG-augmented course material retrieval.
-- `POST /api/ai/summarize/` — Request key takeaway bullet summary of a document.
-- `POST /api/ai/quiz/generate/` — Generate an automated N-question quiz on a given module.
+### AI Engine Endpoints & Payload Examples
+
+#### 1. Ask Course Material Q&A (`POST /api/ai/ask/`)
+```json
+// Request Body
+{
+  "course_id": 42,
+  "question": "What are the main differences between TCP and UDP?"
+}
+
+// Response (200 OK)
+{
+  "answer": "TCP is a connection-oriented protocol that guarantees packet delivery, whereas UDP is connectionless and optimized for real-time speed...",
+  "sources": [
+    { "document": "Chapter4_TransportLayer.pdf", "page": 12 }
+  ]
+}
+```
+
+#### 2. Generate Automated Quiz (`POST /api/ai/quiz/generate/`)
+```json
+// Request Body
+{
+  "course_id": 42,
+  "module_id": 3,
+  "num_questions": 5,
+  "difficulty": "medium"
+}
+```
 
 ---
 
