@@ -77,6 +77,20 @@ graph TD
 
 ---
 
+## 📡 REST API Specifications
+
+### Authentication Endpoints
+- `POST /api/auth/register/` — Register a new student or instructor profile.
+- `POST /api/auth/login/` — Authenticate credentials and receive JWT access/refresh token pair.
+- `GET /api/auth/profile/` — Fetch authenticated user profile and streak statistics.
+
+### AI Engine Endpoints
+- `POST /api/ai/ask/` — Submit a question for RAG-augmented course material retrieval.
+- `POST /api/ai/summarize/` — Request key takeaway bullet summary of a document.
+- `POST /api/ai/quiz/generate/` — Generate an automated N-question quiz on a given module.
+
+---
+
 ## 📂 Repository Directory Breakdown
 
 ```text
