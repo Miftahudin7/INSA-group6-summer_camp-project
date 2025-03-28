@@ -76,7 +76,7 @@ graph TD
 
 ---
 
-## 🔐 Security & File Management
+## 🔐 Security & Network Policies
 
 ### JWT Authentication Flow
 BrightRoot Academy implements stateless **JSON Web Token (JWT)** authentication powered by `djangorestframework-simplejwt`.
@@ -99,6 +99,11 @@ sequenceDiagram
 - **MIME Type Validation**: Strictly enforces `.pdf`, `.docx`, `.txt`, and image extensions prior to vector processing.
 - **File Sanitization**: Filenames are sanitized via `django.utils.text.slugify` to prevent path traversal attacks.
 - **Media Access Control**: Course materials are accessible only to authenticated users enrolled in the given course.
+
+### 🌐 Cross-Origin Resource Sharing (CORS) Policy
+- Configured via `django-cors-headers` middleware.
+- Whitelists frontend dev servers (`http://localhost:5173`) and production domains.
+- Safely handles `OPTIONS` HTTP preflight requests with credentials enabled (`CORS_ALLOW_CREDENTIALS = True`).
 
 ---
 
