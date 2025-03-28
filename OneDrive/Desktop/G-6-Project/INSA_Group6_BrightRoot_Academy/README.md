@@ -76,6 +76,26 @@ graph TD
 
 ---
 
+## 🔐 Security & JWT Authentication Flow
+
+BrightRoot Academy implements stateless **JSON Web Token (JWT)** authentication powered by `djangorestframework-simplejwt`.
+
+```mermaid
+sequenceDiagram
+    participant User as React Client
+    participant API as Django REST API
+    participant DB as PostgreSQL DB
+
+    User->>API: POST /api/auth/login/ (username, password)
+    API->>DB: Validate user credentials
+    DB-->>API: User valid
+    API-->>User: Return 200 OK (access_token 15m, refresh_token 7d)
+    User->>API: GET /api/courses/ (Bearer <access_token>)
+    API-->>User: Return requested data
+```
+
+---
+
 ## ⚡ Key Features & Portals
 
 ### 👨‍🎓 Student Experience
@@ -96,6 +116,7 @@ graph TD
 ### Authentication Endpoints
 - `POST /api/auth/register/` — Register a new student or instructor profile.
 - `POST /api/auth/login/` — Authenticate credentials and receive JWT access/refresh token pair.
+- `POST /api/auth/token/refresh/` — Obtain a new access token using a valid refresh token.
 - `GET /api/auth/profile/` — Fetch authenticated user profile and streak statistics.
 
 ### AI Engine Endpoints & Payload Examples
