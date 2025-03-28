@@ -76,8 +76,9 @@ graph TD
 
 ---
 
-## 🔐 Security & JWT Authentication Flow
+## 🔐 Security & File Management
 
+### JWT Authentication Flow
 BrightRoot Academy implements stateless **JSON Web Token (JWT)** authentication powered by `djangorestframework-simplejwt`.
 
 ```mermaid
@@ -93,6 +94,11 @@ sequenceDiagram
     User->>API: GET /api/courses/ (Bearer <access_token>)
     API-->>User: Return requested data
 ```
+
+### 📁 Document Upload & Media Storage Security
+- **MIME Type Validation**: Strictly enforces `.pdf`, `.docx`, `.txt`, and image extensions prior to vector processing.
+- **File Sanitization**: Filenames are sanitized via `django.utils.text.slugify` to prevent path traversal attacks.
+- **Media Access Control**: Course materials are accessible only to authenticated users enrolled in the given course.
 
 ---
 
