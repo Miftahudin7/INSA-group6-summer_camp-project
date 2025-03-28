@@ -62,6 +62,20 @@ graph TD
 
 ---
 
+## 👥 Role-Based Access Control (RBAC) Matrix
+
+| Feature / Action | 🎓 Student | 👩‍🏫 Instructor | 🛡 Admin |
+|---|:---:|:---:|:---:|
+| Browse & Enroll in Courses | ✅ | ✅ | ✅ |
+| Query AI Course Assistant (RAG) | ✅ | ✅ | ✅ |
+| Generate Practice Quizzes | ✅ | ✅ | ✅ |
+| Upload Course PDFs & Index Embeddings | ❌ | ✅ | ✅ |
+| Manage Course Modules & Lessons | ❌ | ✅ | ✅ |
+| View Class Analytics & Streaks | Own Only | All Class | System-wide |
+| Manage User Roles & System Logs | ❌ | ❌ | ✅ |
+
+---
+
 ## ⚡ Key Features & Portals
 
 ### 👨‍🎓 Student Experience
