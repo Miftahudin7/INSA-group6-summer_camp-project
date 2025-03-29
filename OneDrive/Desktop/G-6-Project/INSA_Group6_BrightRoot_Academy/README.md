@@ -47,12 +47,15 @@ graph TD
 
 ---
 
-## 🧠 ChromaDB Vector Store & RAG Ingestion
+## 🧠 ChromaDB Vector Store & Knowledge Base Ingestion
 
 BrightRoot Academy relies on **ChromaDB** for storing embedding representations of course materials:
 
 ```bash
-# Ingest course documents into ChromaDB vector database
+# Ingest single course syllabus PDF
+python manage.py ingest_doc --file ./media/courses/cs101/syllabus.pdf --course_id 42
+
+# Bulk ingest entire course materials folder into ChromaDB
 python manage.py ingest_course_docs --course_id 42 --dir ./media/courses/cs101/
 ```
 
