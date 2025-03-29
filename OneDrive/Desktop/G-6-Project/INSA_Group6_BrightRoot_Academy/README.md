@@ -47,6 +47,20 @@ graph TD
 
 ---
 
+## 🧠 ChromaDB Vector Store & RAG Ingestion
+
+BrightRoot Academy relies on **ChromaDB** for storing embedding representations of course materials:
+
+```bash
+# Ingest course documents into ChromaDB vector database
+python manage.py ingest_course_docs --course_id 42 --dir ./media/courses/cs101/
+```
+
+- **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2` or HuggingFace embeddings.
+- **Chunking Strategy**: RecursiveCharacterTextSplitter with `chunk_size=1000` and `chunk_overlap=200`.
+
+---
+
 ## 🛠 Tech Stack Matrix
 
 | Domain | Technology / Framework | Purpose |
