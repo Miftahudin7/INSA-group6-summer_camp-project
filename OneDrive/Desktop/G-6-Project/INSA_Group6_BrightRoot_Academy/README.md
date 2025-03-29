@@ -61,6 +61,7 @@ python manage.py ingest_course_docs --course_id 42 --dir ./media/courses/cs101/
 
 - **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2` or HuggingFace embeddings.
 - **Chunking Strategy**: RecursiveCharacterTextSplitter with `chunk_size=1000` and `chunk_overlap=200`.
+- **RAG Fallback Engine**: If Groq API keys are absent during local offline development, BrightRoot automatically switches to an in-memory rule-based mock response generator to prevent API crashes.
 
 ---
 
