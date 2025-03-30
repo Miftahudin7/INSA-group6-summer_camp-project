@@ -47,21 +47,29 @@ graph TD
 
 ---
 
-## 🧠 ChromaDB Vector Store & Knowledge Base Ingestion
+## 🧪 Testing & Quality Assurance
 
-BrightRoot Academy relies on **ChromaDB** for storing embedding representations of course materials:
-
+### Django Backend Unit & Integration Tests (Pytest / Django Test Runner)
 ```bash
-# Ingest single course syllabus PDF
-python manage.py ingest_doc --file ./media/courses/cs101/syllabus.pdf --course_id 42
+cd Backend
 
-# Bulk ingest entire course materials folder into ChromaDB
-python manage.py ingest_course_docs --course_id 42 --dir ./media/courses/cs101/
+# Run Django test suite
+python manage.py test
+
+# Run tests with Pytest and coverage metrics
+pytest --cov=api --cov=core
 ```
 
-- **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2` or HuggingFace embeddings.
-- **Chunking Strategy**: RecursiveCharacterTextSplitter with `chunk_size=1000` and `chunk_overlap=200`.
-- **RAG Fallback Engine**: If Groq API keys are absent during local offline development, BrightRoot automatically switches to an in-memory rule-based mock response generator to prevent API crashes.
+### React Frontend Unit Tests (Vitest + React Testing Library)
+```bash
+cd front-end
+
+# Run Vitest unit tests
+npm run test
+
+# Run test suite in watch mode
+npm run test:watch
+```
 
 ---
 
