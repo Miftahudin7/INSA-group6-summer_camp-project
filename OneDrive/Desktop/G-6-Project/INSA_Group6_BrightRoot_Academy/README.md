@@ -71,6 +71,11 @@ npm run test
 npm run test:watch
 ```
 
+### API Endpoint Health Check (cURL)
+```bash
+curl -X GET http://localhost:8000/api/common/health/ -H "Accept: application/json"
+```
+
 ---
 
 ## 🛠 Tech Stack Matrix
