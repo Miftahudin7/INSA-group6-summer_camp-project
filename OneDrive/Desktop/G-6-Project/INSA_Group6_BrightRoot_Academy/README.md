@@ -47,9 +47,9 @@ graph TD
 
 ---
 
-## 🐳 Containerization & CI/CD Pipelines
+## 🐳 Containerization & Deployment (Docker / Cloud)
 
-BrightRoot Academy incorporates automated **CI/CD workflows** via **GitHub Actions**:
+BrightRoot Academy incorporates automated **CI/CD workflows** and container deployment:
 
 ```bash
 # Build and spin up all microservices via Docker Compose
@@ -60,7 +60,7 @@ docker compose logs -f backend
 ```
 
 - **Continuous Integration (`.github/workflows/ci.yml`)**: Automatically triggers on pull requests to run Django test suite (`python manage.py test`), Flake8 linting, and Vitest frontend assertions.
-- **Continuous Deployment (`.github/workflows/cd.yml`)**: Builds Docker images on tag releases and triggers automated container deployment.
+- **Render / Heroku Cloud Hosting**: Pre-configured `Procfile` and `render.yaml` descriptors for zero-downtime deployment.
 
 ---
 
