@@ -47,33 +47,16 @@ graph TD
 
 ---
 
-## 🧪 Testing & Quality Assurance
+## 🐳 Containerization & Deployment (Docker)
 
-### Django Backend Unit & Integration Tests (Pytest / Django Test Runner)
+BrightRoot Academy includes complete multi-container **Docker** setup:
+
 ```bash
-cd Backend
+# Build and spin up all microservices via Docker Compose
+docker compose up --build -d
 
-# Run Django test suite
-python manage.py test
-
-# Run tests with Pytest and coverage metrics
-pytest --cov=api --cov=core
-```
-
-### React Frontend Unit Tests (Vitest + React Testing Library)
-```bash
-cd front-end
-
-# Run Vitest unit tests
-npm run test
-
-# Run test suite in watch mode
-npm run test:watch
-```
-
-### API Endpoint Health Check (cURL)
-```bash
-curl -X GET http://localhost:8000/api/common/health/ -H "Accept: application/json"
+# Inspect running container logs
+docker compose logs -f backend
 ```
 
 ---
