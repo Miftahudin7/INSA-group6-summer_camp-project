@@ -47,9 +47,9 @@ graph TD
 
 ---
 
-## 🐳 Containerization & Deployment (Docker)
+## 🐳 Containerization & CI/CD Pipelines
 
-BrightRoot Academy includes complete multi-container **Docker** setup:
+BrightRoot Academy incorporates automated **CI/CD workflows** via **GitHub Actions**:
 
 ```bash
 # Build and spin up all microservices via Docker Compose
@@ -59,8 +59,8 @@ docker compose up --build -d
 docker compose logs -f backend
 ```
 
-- **Backend Container**: Python 3.11-slim image running Gunicorn with 4 worker threads on port 8000.
-- **Frontend Container**: Node 20-alpine builder step compiled to multi-stage Nginx static web server on port 80.
+- **Continuous Integration (`.github/workflows/ci.yml`)**: Automatically triggers on pull requests to run Django test suite (`python manage.py test`), Flake8 linting, and Vitest frontend assertions.
+- **Continuous Deployment (`.github/workflows/cd.yml`)**: Builds Docker images on tag releases and triggers automated container deployment.
 
 ---
 
