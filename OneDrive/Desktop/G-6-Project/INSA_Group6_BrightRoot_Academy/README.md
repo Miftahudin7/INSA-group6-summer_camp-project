@@ -59,6 +59,9 @@ docker compose up --build -d
 docker compose logs -f backend
 ```
 
+- **Backend Container**: Python 3.11-slim image running Gunicorn with 4 worker threads on port 8000.
+- **Frontend Container**: Node 20-alpine builder step compiled to multi-stage Nginx static web server on port 80.
+
 ---
 
 ## 🛠 Tech Stack Matrix
