@@ -47,6 +47,15 @@ graph TD
 
 ---
 
+## 🎯 Product Roadmap & Future Milestones
+
+- [x] **Phase 1: Core LMS Infrastructure & Auth** — Student/Instructor roles, JWT auth, DRF REST backend, React frontend shell.
+- [x] **Phase 2: RAG AI Integration** — LangChain document chunking, ChromaDB vector store, Groq Llama 3 Q&A assistant, and quiz generator.
+- [🔄] **Phase 3: Multi-Agent Tutoring System** — Autonomous CrewAI multi-agent workflows for personalized grading, automated essay feedback, and adaptive difficulty scaling.
+- [🔄] **Phase 4: Real-time Audio/Video Lecture Summarization** — Live speech-to-text transcript processing and automated flashcard generation.
+
+---
+
 ## 🐳 Containerization & Deployment (Docker / Cloud)
 
 BrightRoot Academy incorporates automated **CI/CD workflows** and container deployment:
