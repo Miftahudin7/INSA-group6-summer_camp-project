@@ -47,7 +47,7 @@ graph TD
 
 ---
 
-## 🤝 Contributing Guidelines
+## 🤝 Contributing & Code of Conduct
 
 We welcome contributions to BrightRoot Academy! Please follow these steps to contribute:
 
@@ -56,6 +56,8 @@ We welcome contributions to BrightRoot Academy! Please follow these steps to con
 3. **Commit your Changes**: `git commit -m 'feat(auth): add OAuth2 social login provider'`.
 4. **Push to Branch**: `git push origin feature/amazing-feature`.
 5. **Open a Pull Request** against the `main` branch.
+
+All contributors must adhere to our [Contributor Code of Conduct](https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy) to ensure a respectful, inclusive community environment.
 
 ---
 
