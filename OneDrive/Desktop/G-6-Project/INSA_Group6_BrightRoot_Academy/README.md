@@ -47,6 +47,18 @@ graph TD
 
 ---
 
+## 🤝 Contributing Guidelines
+
+We welcome contributions to BrightRoot Academy! Please follow these steps to contribute:
+
+1. **Fork the Repository** on GitHub.
+2. **Create a Feature Branch**: `git checkout -b feature/amazing-feature`.
+3. **Commit your Changes**: `git commit -m 'feat(auth): add OAuth2 social login provider'`.
+4. **Push to Branch**: `git push origin feature/amazing-feature`.
+5. **Open a Pull Request** against the `main` branch.
+
+---
+
 ## 🎯 Product Roadmap & Future Milestones
 
 - [x] **Phase 1: Core LMS Infrastructure & Auth** — Student/Instructor roles, JWT auth, DRF REST backend, React frontend shell.
