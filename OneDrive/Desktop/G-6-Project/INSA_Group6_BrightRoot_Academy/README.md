@@ -315,6 +315,7 @@ npm run preview
 
 ---
 
-## 📜 License
+## 📜 License & Copyright
 
-MIT License © 2025 BrightRoot Academy — INSA Group 6
+Distributed under the **MIT License**. See `LICENSE` for details.  
+© 2025 **BrightRoot Academy Platform** — INSA Group 6. All Rights Reserved.
