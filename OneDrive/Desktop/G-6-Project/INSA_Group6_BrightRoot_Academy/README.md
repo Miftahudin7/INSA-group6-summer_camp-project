@@ -23,6 +23,16 @@ By leveraging **Retrieval-Augmented Generation (RAG)** powered by **LangChain**,
 
 ---
 
+## 👥 INSA Group 6 Team & Acknowledgments
+
+BrightRoot Academy was engineered with dedication by **INSA Group 6**:
+
+- **Software Engineering & Architecture**: INSA Group 6 Development Team
+- **Project Repository**: [github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy](https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy.git)
+- **Special Thanks**: Information Network Security Administration (INSA) academy instructors and project advisors.
+
+---
+
 ## 🏗 System Architecture
 
 ```mermaid
