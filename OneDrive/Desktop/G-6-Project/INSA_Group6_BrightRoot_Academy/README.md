@@ -7,6 +7,7 @@
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)]()
 [![Django](https://img.shields.io/badge/Django-4.2_DRF-092E20?style=for-the-badge&logo=django&logoColor=white)]()
 [![LangChain](https://img.shields.io/badge/LangChain-RAG_AI-121212?style=for-the-badge&logo=chainlink&logoColor=white)]()
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)]()
 [![Group](https://img.shields.io/badge/INSA-Group_6_Project-FF9900?style=for-the-badge)]()
 
 **Empowering Students and Instructors with Personalized RAG-driven Education Intelligence.**
