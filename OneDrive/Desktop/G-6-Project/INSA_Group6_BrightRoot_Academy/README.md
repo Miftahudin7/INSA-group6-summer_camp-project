@@ -11,6 +11,8 @@
 
 **Empowering Students and Instructors with Personalized RAG-driven Education Intelligence.**
 
+[Executive Summary](#-executive-summary) • [Architecture](#-system-architecture) • [Features](#-key-features--portals) • [Tech Stack](#-tech-stack-matrix) • [API Specs](#-rest-api-specifications--sample-payloads) • [Quick Start](#-installation--development-setup)
+
 </div>
 
 ---
