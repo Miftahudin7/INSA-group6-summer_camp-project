@@ -17,6 +17,24 @@
 
 ---
 
+## 📋 Table of Contents
+- [🌟 Executive Summary](#-executive-summary)
+- [👥 INSA Group 6 Team & Acknowledgments](#-insa-group-6-team--acknowledgments)
+- [🏗 System Architecture & RAG Pipeline](#-system-architecture)
+- [🤝 Contributing & Code of Conduct](#-contributing--code-of-conduct)
+- [🎯 Product Roadmap & Future Milestones](#-product-roadmap--future-milestones)
+- [🐳 Containerization & Deployment (Docker)](#-containerization--deployment-docker--cloud)
+- [🛠 Tech Stack Matrix](#-tech-stack-matrix)
+- [👥 Role-Based Access Control (RBAC) Matrix](#-role-based-access-control-rbac-matrix)
+- [🔐 Security & Network Policies](#-security--network-policies)
+- [⚡ Key Features & Portals](#-key-features--portals)
+- [📡 REST API Specifications](#-rest-api-specifications--sample-payloads)
+- [📂 Repository Directory Breakdown](#-repository-directory-breakdown)
+- [🔑 Environment Configuration (`.env`)](#-environment-configuration-env)
+- [⚙️ Installation & Development Setup](#%EF%B8%8F-installation--development-setup)
+
+---
+
 ## 🌟 Executive Summary
 
 **BrightRoot Academy** is a modern, state-of-the-art **Learning Management System (LMS)** engineered by **INSA Group 6**. It bridges traditional educational management with cutting-edge **Artificial Intelligence (AI)**.
