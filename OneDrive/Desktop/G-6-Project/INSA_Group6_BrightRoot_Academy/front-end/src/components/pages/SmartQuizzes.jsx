@@ -1,36 +1,49 @@
 import React, { useState } from "react";
-import { Container, Button, Card, Form } from "react-bootstrap";
+import { Container, Button, Card, Form, Spinner } from "react-bootstrap";
+import axios from "axios";
 
 const SmartQuizzes = ({ onBack }) => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Simulate generating quiz questions
-  const generateQuiz = () => {
-    const sampleQuestions = [
-      {
-        id: 1,
-        question: "What is the capital of Ethiopia?",
-        options: ["Addis Ababa", "Gondar", "Mekele", "Bahir Dar"],
-        correct: "Addis Ababa",
-      },
-      {
-        id: 2,
-        question: "What is 5 + 7?",
-        options: ["10", "11", "12", "13"],
-        correct: "12",
-      },
-      {
-        id: 3,
-        question: "Which element has the chemical symbol O?",
-        options: ["Oxygen", "Gold", "Silver", "Iron"],
-        correct: "Oxygen",
-      },
-    ];
-    setQuestions(sampleQuestions);
+  // Fetch quiz from backend
+  const generateQuiz = async () => {
+    setLoading(true);
     setShowResults(false);
     setAnswers({});
+
+    try {
+      const fileId = 1; // Replace with actual file ID or selected content
+      const numQuestions = 5; // Or any user-defined number
+
+      const response = await axios.post(
+        "http://localhost:8000/api/ai/quiz/generate/", // Your Django endpoint
+        { file_id: fileId, num_questions: numQuestions },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`, // JWT from login
+          },
+        }
+      );
+
+      const quizData = response.data.quiz.questions;
+      // Transform quizData to match your state format if needed
+      const formattedQuestions = quizData.map((q, index) => ({
+        id: index + 1,
+        question: q.question,
+        options: Object.values(q.options),
+        correct: q.correct_answer,
+      }));
+
+      setQuestions(formattedQuestions);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to generate quiz. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleAnswerChange = (qId, value) => {
@@ -53,8 +66,8 @@ const SmartQuizzes = ({ onBack }) => {
       </Button>
       <h4 className="text-light mb-3">Smart Quizzes</h4>
 
-      <Button variant="success" onClick={generateQuiz} className="mb-3">
-        Generate Quiz
+      <Button variant="success" onClick={generateQuiz} className="mb-3" disabled={loading}>
+        {loading ? <Spinner animation="border" size="sm" /> : "Generate Quiz"}
       </Button>
 
       {questions.map((q) => (

@@ -4,8 +4,10 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8000"; // Django backend
 
+// Create the authentication context
 const AuthContext = createContext();
 
+// Custom hook
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -14,68 +16,44 @@ export const useAuth = () => {
   return context;
 };
 
+// Provider component
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Load user profile if token exists
   useEffect(() => {
-    const checkAuthStatus = async () => {
-      const access = localStorage.getItem("brightroot_token");
-      const storedUser = localStorage.getItem("brightroot_user");
+    const access = localStorage.getItem("brightroot_token");
+    const storedUser = localStorage.getItem("brightroot_user");
 
-      if (access && storedUser) {
-        try {
-          await axios.get(`${API_BASE_URL}/api/users/profile/`, {
-            headers: { Authorization: `Bearer ${access}` },
-          });
-          setUser(JSON.parse(storedUser));
-        } catch {
-          await handleTokenRefresh();
-        }
-      }
+    if (access && storedUser) {
+      setUser(JSON.parse(storedUser));
       setIsLoading(false);
-    };
-    checkAuthStatus();
+    } else if (access) {
+      axios
+        .get(`${API_BASE_URL}/api/users/profile/`, {
+          headers: { Authorization: `Bearer ${access}` },
+        })
+        .then((res) => {
+          setUser(res.data);
+          localStorage.setItem("brightroot_user", JSON.stringify(res.data));
+        })
+        .catch(() => setUser(null))
+        .finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
+    }
   }, []);
 
-  const handleTokenRefresh = async () => {
-    const refresh = localStorage.getItem("brightroot_refresh");
-    if (!refresh) {
-      logout();
-      return;
-    }
-    try {
-      const res = await axios.post(`${API_BASE_URL}/api/token/refresh/`, {
-        refresh,
-      });
-      localStorage.setItem("brightroot_token", res.data.access);
-
-      const profileRes = await axios.get(`${API_BASE_URL}/api/users/profile/`, {
-        headers: { Authorization: `Bearer ${res.data.access}` },
-      });
-
-      localStorage.setItem("brightroot_user", JSON.stringify(profileRes.data));
-      setUser(profileRes.data);
-    } catch {
-      logout();
-    }
-  };
-
-  // ✅ Safe Login — supports both username or email depending on backend
+  // ✅ Login (supports username or email)
   const login = async (identifier, password) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const payload = {
-        username: identifier, // Django SimpleJWT uses `username`
-      };
-
-      // if the backend expects email instead of username, send both
-      if (identifier.includes("@")) {
-        payload.email = identifier;
-      }
+      const payload = { username: identifier };
+      if (identifier.includes("@")) payload.email = identifier;
 
       const response = await axios.post(`${API_BASE_URL}/api/token/`, {
         ...payload,
@@ -84,15 +62,18 @@ export const AuthProvider = ({ children }) => {
 
       const { access, refresh } = response.data;
 
+      // Fetch user profile
       const profileRes = await axios.get(`${API_BASE_URL}/api/users/profile/`, {
         headers: { Authorization: `Bearer ${access}` },
       });
 
       const userData = profileRes.data;
 
+      // Save everything locally
       localStorage.setItem("brightroot_token", access);
       localStorage.setItem("brightroot_refresh", refresh);
       localStorage.setItem("brightroot_user", JSON.stringify(userData));
+
       setUser(userData);
 
       return { success: true, user: userData };
@@ -109,12 +90,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Logout
   const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem("brightroot_token");
+    localStorage.removeItem("brightroot_refresh");
+    localStorage.removeItem("brightroot_user");
     setUser(null);
     setError(null);
   };
 
+  // ✅ Register new user
   const register = async (userData) => {
     setIsLoading(true);
     setError(null);
@@ -127,6 +112,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       const { access, refresh, user } = response.data;
+
       if (access && refresh) {
         localStorage.setItem("brightroot_token", access);
         localStorage.setItem("brightroot_refresh", refresh);
@@ -155,12 +141,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Update user profile in context and localStorage
   const updateUserProfile = (updates) => {
     const updatedUser = { ...user, ...updates };
     setUser(updatedUser);
     localStorage.setItem("brightroot_user", JSON.stringify(updatedUser));
   };
 
+  // Context value
   const value = {
     user,
     isLoading,

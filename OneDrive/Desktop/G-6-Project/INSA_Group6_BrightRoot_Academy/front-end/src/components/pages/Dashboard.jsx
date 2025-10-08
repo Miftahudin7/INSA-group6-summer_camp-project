@@ -16,8 +16,42 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import "./Dashboard.css";
+import api from "../../services/api";
+import { isAuthenticated, getToken } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
+  const token = getToken();
+  const navigate = useNavigate();
+  
+  console.log("🔐 Authentication check:");
+  console.log("  - isAuthenticated:", isAuthenticated());
+  console.log("  - token exists:", !!token);
+  console.log("  - token length:", token?.length);
+
+  if (!isAuthenticated()) {
+    return (
+      <Container fluid className="py-4">
+        <Alert variant="danger">
+          <h4>Authentication Required</h4>
+          <p>You are not logged in. Please log in to access the dashboard.</p>
+          <div className="mt-3">
+            <Button variant="primary" onClick={() => window.location.href = '/login'} className="me-2">
+              Go to Login
+            </Button>
+            <Button variant="outline-secondary" onClick={() => {
+              localStorage.clear();
+              window.location.reload();
+            }}>
+              Clear Storage & Reload
+            </Button>
+          </div>
+        </Alert>
+      </Container>
+    );
+  }
+
+
   const [activeTab, setActiveTab] = useState("upload");
   const [files, setFiles] = useState([]);
   const [summaries, setSummaries] = useState([]);
@@ -26,6 +60,8 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loadingSummaryId, setLoadingSummaryId] = useState(null);
+  const [loadingQuizId, setLoadingQuizId] = useState(null);
 
   // File upload state
   const [uploadForm, setUploadForm] = useState({
@@ -39,8 +75,6 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   // AI generation state
-  const [selectedFileForAI, setSelectedFileForAI] = useState(null);
-  const [aiLoading, setAiLoading] = useState(false);
 
   // Quiz state
   const [quizQuestions, setQuizQuestions] = useState([]);
@@ -52,62 +86,35 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
   const [showSummaryModal, setShowSummaryModal] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
   const [currentSummary, setCurrentSummary] = useState("");
-  const [currentQuiz, setCurrentQuiz] = useState(null);
 
-  const API_BASE_URL = "http://localhost:8000/api";
-  const token = localStorage.getItem("brightroot_token");
-
-  const apiClient = axios.create({
-    baseURL: "http://localhost:8000/api",
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-  });
-
+  // Use your existing api instance from api.js
   useEffect(() => {
     if (selectedSubjectGrade) {
       loadUserFiles();
       loadCommonBooks();
-      loadUserSummaries();
-      loadUserQuizzes();
     }
   }, [selectedSubjectGrade]);
 
   const loadUserFiles = async () => {
     try {
-      const response = await apiClient.get("/notes/files/");
+      const response = await api.get("/notes/files/");
       setFiles(response.data);
     } catch (error) {
       console.error("Failed to load files:", error);
+      if (error.response?.status === 401) {
+        setError("Your session has expired. Please log in again.");
+      }
     }
   };
 
   const loadCommonBooks = async () => {
     try {
-      const response = await apiClient.get(
+      const response = await api.get(
         `/notes/common-books/?subject=${uploadForm.subject}&grade=${uploadForm.grade}`
       );
       setCommonBooks(response.data);
     } catch (error) {
       console.error("Failed to load common books:", error);
-    }
-  };
-
-  const loadUserSummaries = async () => {
-    try {
-      const response = await apiClient.get("/ai/summaries/");
-      setSummaries(response.data);
-    } catch (error) {
-      console.error("Failed to load summaries:", error);
-    }
-  };
-
-  const loadUserQuizzes = async () => {
-    try {
-      const response = await apiClient.get("/ai/quizzes/");
-      setQuizzes(response.data);
-    } catch (error) {
-      console.error("Failed to load quizzes:", error);
     }
   };
 
@@ -129,8 +136,11 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
       formData.append("subject", uploadForm.subject);
       formData.append("grade", uploadForm.grade);
 
-      await apiClient.post("/notes/upload/", formData, {
+      const token = localStorage.getItem("access");
+
+      await api.post("/notes/upload/", formData, {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });
@@ -145,51 +155,72 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
       setSelectedFile(null);
       loadUserFiles();
     } catch (error) {
+      console.error("Upload error:", error);
       setError(error.response?.data?.error || "Failed to upload file");
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Use your api instance for AI requests
   const generateSummary = async (fileId) => {
-    setAiLoading(true);
-    try {
-      const response = await apiClient.post("/ai/summary/generate/", {
-        file_id: fileId,
-      });
+    setLoadingSummaryId(fileId);
+    setError(null);
 
-      setCurrentSummary(response.data.summary);
+    try {
+      const res = await api.post("/ai/summary/generate/", { file_id: fileId });
+      
+      // Add new summary to state
+      setSummaries((prev) => [...prev, {
+        id: res.data.summary_id,
+        file_title: selectedSubjectGrade?.title || "Document",
+        content: res.data.summary,
+        subject: uploadForm.subject,
+        grade: uploadForm.grade,
+        created_at: new Date().toISOString()
+      }]);
+
       setShowSummaryModal(true);
-      loadUserSummaries();
-    } catch (error) {
-      setError(error.response?.data?.error || "Failed to generate summary");
+      setCurrentSummary(res.data.summary);
+
+    } catch (err) {
+      setError(err.response?.data?.error || "Failed to generate summary");
     } finally {
-      setAiLoading(false);
+      setLoadingSummaryId(null);
     }
   };
+
 
   const generateQuiz = async (fileId) => {
-    setAiLoading(true);
-    try {
-      const response = await apiClient.post("/ai/quiz/generate/", {
-        file_id: fileId,
-        num_questions: 5,
-      });
+    setLoadingQuizId(fileId);
+    setError(null);
 
-      setCurrentQuiz(response.data.quiz);
-      setQuizQuestions(response.data.quiz.questions);
-      setUserAnswers({});
+    try {
+      const res = await api.post("/ai/quiz/generate/", { file_id: fileId, num_questions: 5 });
+
+      setQuizzes((prev) => [...prev, {
+        id: res.data.quiz_id,
+        file_title: selectedSubjectGrade?.title || "Document",
+        questions: res.data.quiz,
+        subject: uploadForm.subject,
+        grade: uploadForm.grade,
+        created_at: new Date().toISOString()
+      }]);
+
+      setShowQuizModal(true);
+      setQuizQuestions(res.data.quiz.questions || []);
       setCurrentQuestionIndex(0);
       setShowQuizResults(false);
-      setShowQuizModal(true);
-      loadUserQuizzes();
-    } catch (error) {
-      setError(error.response?.data?.error || "Failed to generate quiz");
+
+    } catch (err) {
+      setError(err.response?.data?.error || "Failed to generate quiz");
     } finally {
-      setAiLoading(false);
+      setLoadingQuizId(null);
     }
   };
 
+
+  // ... rest of your functions (handleQuizAnswer, nextQuestion, etc.) remain the same
   const handleQuizAnswer = (answer) => {
     setUserAnswers((prev) => ({
       ...prev,
@@ -225,6 +256,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
     };
   };
 
+  // ... rest of your render functions remain exactly the same
   const renderUploadTab = () => (
     <div>
       <Card className="mb-4">
@@ -349,7 +381,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
         </Card.Header>
         <Card.Body>
           {files.length === 0 ? (
-            <p className=" ">
+            <p className="text-muted">
               No files uploaded yet. Upload your first study material above!
             </p>
           ) : (
@@ -361,8 +393,8 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                 >
                   <div>
                     <h6 className="mb-1">{file.title}</h6>
-                    <p className="mb-1">{file.description}</p>
-                    <small className=" ">
+                    <p className="mb-1 text-muted">{file.description}</p>
+                    <small className="text-muted">
                       {file.subject} • {file.grade} •{" "}
                       {new Date(file.uploaded_at).toLocaleDateString()}
                     </small>
@@ -374,6 +406,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                       href={`http://localhost:8000/api/notes/download/${file.id}/`}
                       className="btn btn-outline-success btn-sm d-flex align-items-center"
                       target="_blank"
+                      rel="noopener noreferrer"
                       download
                     >
                       <i className="bi bi-download me-1"></i>
@@ -385,10 +418,11 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                       size="sm"
                       variant="outline-primary"
                       onClick={() => generateSummary(file.id)}
-                      disabled={aiLoading}
+                      disabled={loadingSummaryId === file.id}
                     >
                       <i className="bi bi-lightbulb me-1"></i>
                       Summary
+                      {loadingSummaryId === file.id && <Spinner size="sm" className="ms-2" animation="border" />}
                     </Button>
 
                     {/* Quiz Button */}
@@ -396,10 +430,11 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                       size="sm"
                       variant="outline-success"
                       onClick={() => generateQuiz(file.id)}
-                      disabled={aiLoading}
+                      disabled={loadingQuizId === file.id}
                     >
                       <i className="bi bi-question-circle me-1"></i>
                       Quiz
+                      {loadingQuizId === file.id && <Spinner size="sm" className="ms-2" animation="border" />}
                     </Button>
                   </div>
                 </ListGroup.Item>
@@ -423,7 +458,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
         </Card.Header>
         <Card.Body>
           {commonBooks.length === 0 ? (
-            <p className=" ">
+            <p className="text-muted">
               No curriculum materials available for this subject and grade.
             </p>
           ) : (
@@ -435,7 +470,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                 >
                   <div>
                     <h6 className="mb-1">{book.title}</h6>
-                    <small className=" ">
+                    <small className="text-muted">
                       {book.subject} • {book.grade} •{" "}
                       {new Date(book.uploaded_at).toLocaleDateString()}
                     </small>
@@ -461,7 +496,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
         </Card.Header>
         <Card.Body>
           {summaries.length === 0 ? (
-            <p className=" ">
+            <p className="text-muted">
               No summaries generated yet. Upload a document and generate a
               summary!
             </p>
@@ -471,7 +506,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                 <ListGroup.Item key={summary.id}>
                   <h6 className="mb-1">{summary.file_title}</h6>
                   <p className="mb-2">{summary.content.substring(0, 150)}...</p>
-                  <small className=" ">
+                  <small className="text-muted">
                     {summary.subject} • {summary.grade} •{" "}
                     {new Date(summary.created_at).toLocaleDateString()}
                   </small>
@@ -492,7 +527,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
         </Card.Header>
         <Card.Body>
           {quizzes.length === 0 ? (
-            <p className=" ">
+            <p className="text-muted">
               No quizzes generated yet. Upload a document and generate a quiz!
             </p>
           ) : (
@@ -504,7 +539,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                     {quiz.questions.questions?.length || 0} questions •{" "}
                     {quiz.subject} • {quiz.grade}
                   </p>
-                  <small className=" ">
+                  <small className="text-muted">
                     {new Date(quiz.created_at).toLocaleDateString()}
                   </small>
                 </ListGroup.Item>
@@ -528,7 +563,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                   <i className="bi bi-mortarboard-fill text-success me-2"></i>
                   Study Dashboard
                 </h2>
-                <p className="  mb-0">
+                <p className="text-light mb-0">
                   {selectedSubjectGrade?.subject?.name} •{" "}
                   {selectedSubjectGrade?.grade?.label}
                 </p>
@@ -678,7 +713,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                       >
                         {score.percentage}%
                       </h2>
-                      <p className=" ">
+                      <p className="text-muted">
                         You got {score.correct} out of {score.total} questions
                         correct
                       </p>
@@ -697,7 +732,7 @@ const Dashboard = ({ selectedSubjectGrade, onBackToSubjects }) => {
                             <strong>Correct Answer:</strong>{" "}
                             {question.correct_answer}
                           </p>
-                          <p className="  small">{question.explanation}</p>
+                          <p className="text-muted small">{question.explanation}</p>
                         </div>
                       ))}
                     </div>

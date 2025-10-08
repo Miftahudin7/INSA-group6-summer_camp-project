@@ -41,10 +41,8 @@ class FileUploadView(APIView):
 
         try:
             if USE_DUMMY_UPLOAD:
-                # ✅ Dummy file URL (testing only)
                 file_url = "https://example.com/dummy-file.pdf"
             else:
-                # ✅ Real Supabase upload
                 supabase_client = supabase_client_singleton
                 bucket_name = "uploads"
 

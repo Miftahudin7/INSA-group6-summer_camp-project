@@ -33,6 +33,9 @@ SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+# GitHub free AI models API token
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
